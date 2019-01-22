@@ -1,0 +1,20 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      - docker_inote
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - egg-mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  egg-mysql:
+networks:
+  docker_inote:
+    driver: bridge
